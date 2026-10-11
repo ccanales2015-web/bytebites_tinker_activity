@@ -20,6 +20,7 @@ classDiagram
         +list~FoodItem~ items
         +add_item(item: FoodItem) None
         +filter_by_category(category: str) list~FoodItem~
+        +sort_by_popularity() list~FoodItem~
     }
 
     class Transaction {
@@ -46,6 +47,7 @@ classDiagram
 2. **Helper methods (assumption):** `add_purchase()`, `Menu.add_item()`, and `Transaction.add_item()` are not named in the request. They are the minimal way to populate each list.
 3. **No back-reference (assumption):** `Transaction` does not store its `Customer`; the request only requires it to hold items and compute a total. The link is kept through `Customer.purchase_history`.
 4. **Multiplicity (assumption):** A `Transaction` holds `0..*` items because it starts empty and is filled as items are picked. The request does not state whether an empty transaction is allowed.
+5. **Sorting (activity-driven addition, not a client requirement):** The client feature request does not ask for sorting. `Menu.sort_by_popularity()` was added only to meet the Part 3 activity instructions, which ask for a sorting algorithm. It uses the existing `popularity_rating` attribute and returns a new list ordered from highest to lowest rating, leaving `Menu.items` unchanged.
 
 ## Relationships
 
